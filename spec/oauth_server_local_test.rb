@@ -71,16 +71,16 @@ describe 'OAuth Access Token Endpoint' do
 
 end
 
-# describe 'OAuth Authorization Endpoint' do
-#   it "lets a client get end-user authorization" do
-#     page = Mechanize.new.get(server_url("/oauth/authorize"), {
-#       "response_type" => "code",
-#       "client_id"     => CLIENT_ID,
-#       "redirect_uri" => CLIENT_REDIRECT,
-#     })
-#     # do local app engine sdk auth
-#
-#
-#     page.body.should include(CLIENT_ID)
-#   end
-# end
+describe 'OAuth Authorization Endpoint' do
+  it "lets a client get end-user authorization" do
+    page = Mechanize.new.get(server_url("/oauth/authorize"), {
+      "response_type" => "code",
+      "client_id"     => CLIENT_ID,
+      "redirect_uri" => CLIENT_REDIRECT,
+    })
+    # do local app engine sdk auth
+
+
+    page.body.should include(CLIENT_ID)
+  end
+end

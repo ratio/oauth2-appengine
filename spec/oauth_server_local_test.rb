@@ -16,7 +16,7 @@ describe 'OAuth Access Token Endpoint' do
   it "lets client obtain access token with end-user credentials" do
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "password",
-      # "client_id"   => CLIENT_ID,
+      "client_id"   => CLIENT_ID,
       # "client_secret" => CLIENT_SECRET,
       "username" => OWNER_USERNAME,
       "password" => OWNER_PASSWORD,
@@ -28,7 +28,7 @@ describe 'OAuth Access Token Endpoint' do
   it "lets client obtain access token with a refresh token" do
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "password",
-      # "client_id"   => CLIENT_ID,
+      "client_id"   => CLIENT_ID,
       # "client_secret" => CLIENT_SECRET,
       "username" => OWNER_USERNAME,
       "password" => OWNER_PASSWORD,
@@ -38,7 +38,7 @@ describe 'OAuth Access Token Endpoint' do
     refresh_token = response['refresh_token']
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "refresh_token",
-      # "client_id"   => CLIENT_ID,
+      "client_id"   => CLIENT_ID,
       # "client_secret" => CLIENT_SECRET,
       "refresh_token" => refresh_token,
     })
@@ -73,14 +73,12 @@ end
 
 describe 'OAuth Authorization Endpoint' do
   it "lets a client get end-user authorization" do
-    page = Mechanize.new.get(server_url("/oauth/authorize"), {
+    a = Mechanize.new { |agent| agent.follow_meta_refresh = true }
+    page = a.post(server_url("/oauth/authorize"), {
       "response_type" => "code",
       "client_id"     => CLIENT_ID,
       "redirect_uri" => CLIENT_REDIRECT,
     })
-    # do local app engine sdk auth
-
-
-    page.body.should include(CLIENT_ID)
+    page.uri.request_uri.should include("code=code_bar")
   end
 end

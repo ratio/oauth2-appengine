@@ -17,7 +17,7 @@ describe 'OAuth Access Token Endpoint' do
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "password",
       "client_id"   => CLIENT_ID,
-      # "client_secret" => CLIENT_SECRET,
+      "client_secret" => CLIENT_SECRET,
       "username" => OWNER_USERNAME,
       "password" => OWNER_PASSWORD,
     })
@@ -29,7 +29,7 @@ describe 'OAuth Access Token Endpoint' do
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "password",
       "client_id"   => CLIENT_ID,
-      # "client_secret" => CLIENT_SECRET,
+      "client_secret" => CLIENT_SECRET,
       "username" => OWNER_USERNAME,
       "password" => OWNER_PASSWORD,
     })
@@ -39,7 +39,7 @@ describe 'OAuth Access Token Endpoint' do
     page = Mechanize.new.post(server_url("/oauth/token"), {
       "grant_type"  => "refresh_token",
       "client_id"   => CLIENT_ID,
-      # "client_secret" => CLIENT_SECRET,
+      "client_secret" => CLIENT_SECRET,
       "refresh_token" => refresh_token,
     })
     response = JSON.parse(page.body)

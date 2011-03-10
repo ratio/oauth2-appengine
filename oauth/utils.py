@@ -38,6 +38,9 @@ def oauth_required(scope=None, realm='Example OAuth Service'):
                 return
             
             token = OAuth_Token.get_by_access_token(token)
+            if not token:
+                render_error('invalid_token', "This token is not valid")
+                return
             if token.is_expired():
                 if token.refresh_token:
                     render_error('expired_token', "This token has expired")

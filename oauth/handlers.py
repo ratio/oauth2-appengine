@@ -201,7 +201,7 @@ class AccessTokenHandler(webapp.RequestHandler):
             
     def handle_authorization_code(self, client, scope=None):
         authorization   = OAuth_Authorization.get_by_code(self.request.get('code'))
-        redirect_uri    = self.request.get('redirect_url')
+        redirect_uri    = self.request.get('redirect_uri')
         
         if not authorization or not authorization.validate(code, redirect_uri, client.client_id):
             self.render_error('invalid_grant', "Authorization code expired or invalid.")
